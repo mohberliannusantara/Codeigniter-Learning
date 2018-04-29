@@ -7,6 +7,8 @@ class Biodata extends CI_Controller
   function __construct()
   {
     parent::__construct();
+
+    $this->load->helper('MY');
     $this->load->model('Biodata_model');
   }
 
