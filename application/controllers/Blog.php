@@ -124,12 +124,12 @@ class Blog extends CI_Controller {
 		// Mendapatkan data dari Blog_model
 		$data['artikel'] = $this->blog_model->get_by_slug($slug);
 
-		// Jika slug kosong atau tidak ada di db, lempar user ke halaman 404
+		//cek apakah judul/slug kosong atau tidak
 		if ( empty($slug) || !isset($data['artikel']) ) show_404();
 
 		$this->load->view("templates/header");
 
-		// Passing data ke view
+		// Passing data ke view blog_read
 		$this->load->view('blogs/blog_read', $data);
 
 		$this->load->view("templates/footer");
@@ -141,22 +141,20 @@ class Blog extends CI_Controller {
 
 		$data['page_title'] = 'Edit Artikel';
 
-		// Get artikel dari model berdasarkan $id
+		// mendapatkan artikel dari model berdasarkan id
 		$data['artikel'] = $this->blog_model->get_by_id($id);
 
-		// Jika id kosong atau tidak ada id yg dimaksud, lempar user ke halaman blog
+		// cek apakah id kosong atau tidak
 		if ( empty($id) || !$data['artikel'] ) redirect('blog');
 
-			// Gunakan fungsi dari model untuk mengisi data dalam dropdown
-			$data['categories'] = $this->category_model->generate_cat_dropdown();
-			// Kita simpan dulu nama file yang lama
+			$data['categories'] = $this->category_model->generate_cat_drop;
+
 			$old_image = $data['artikel']->post_thumbnail;
 
-			// Kita butuh helper dan library berikut
-		    $this->load->helper('form');
-		    $this->load->library('form_validation');
+	    $this->load->helper('form');
+	    $this->load->library('form_validation');
 
-		    // Kita validasi input sederhana, sila cek http://localhost/ci3/user_guide/libraries/form_validation.html
+	    // validasi input
 			$this->form_validation->set_rules('title', 'Judul', 'required',
 				array('required' => 'Isi %s donk, males amat.'));
 		    $this->form_validation->set_rules('text', 'Konten', 'required|min_length[8]',
@@ -172,38 +170,37 @@ class Blog extends CI_Controller {
 		        $this->load->view('blogs/blog_edit', $data);
 		        $this->load->view('templates/footer');
 
-		    } else {
+		    }
+				else {
 
-	    		// Apakah user upload gambar?
+	    		// cek apakah user upload gambar
 	    		if ( isset($_FILES['thumbnail']) && $_FILES['thumbnail']['size'] > 0 )
 	    		{
 	    			// Konfigurasi folder upload & file yang diijinkan
-	    			// Jangan lupa buat folder uploads di dalam ci3-course
 	    			$config['upload_path']          = './uploads/';
 	    	        $config['allowed_types']        = 'gif|jpg|png';
 	    	        $config['max_size']             = 100;
 	    	        $config['max_width']            = 1024;
 	    	        $config['max_height']           = 768;
 
-	    	        // Load library upload
 	    	        $this->load->library('upload', $config);
 
-	    	        // Apakah file berhasil diupload?
+	    	        // cel apakah file berhasil diupload atau tidak
 	    	        if ( ! $this->upload->do_upload('thumbnail'))
 	    	        {
 	    	        	$data['upload_error'] = $this->upload->display_errors();
 
 	    	        	$post_image = '';
 
-	    	        	// Kita passing pesan error upload ke view supaya user mencoba upload ulang
-	    	            $this->load->view('templates/header');
-	    	            $this->load->view('blogs/blog_edit', $data);
-	    	            $this->load->view('templates/footer');
+	    	          $this->load->view('templates/header');
+	    	          $this->load->view('blogs/blog_edit', $data);
+	    	          $this->load->view('templates/footer');
 
 	    	        } else {
 
-	    	        	// Hapus file image yang lama jika ada
+									// cek apakah ada file lama atau tidak
 	    	        	if( !empty($old_image) ) {
+										//jika ada maka hapus file lama
 	    	        		if ( file_exists( './uploads/'.$old_image ) ){
 	    	        		    unlink( './uploads/'.$old_image );
 	    	        		} else {
@@ -211,14 +208,12 @@ class Blog extends CI_Controller {
 	    	        		}
 	    	        	}
 
-	    	        	// Simpan nama file-nya jika berhasil diupload
 	    	            $img_data = $this->upload->data();
 	    	            $post_image = $img_data['file_name'];
 
 	    	        }
 	    		} else {
 
-	    			// User tidak upload gambar, jadi kita kosongkan field ini, atau jika sudah ada, gunakan image sebelumnya
 	    			$post_image = ( !empty($old_image) ) ? $old_image : '';
 
 	    		}
@@ -230,10 +225,8 @@ class Blog extends CI_Controller {
 		    	    'post_thumbnail' => $post_image,
 		    	);
 
-		    	// Jika tidak ada error upload gambar, maka kita update datanya
 		    	if( empty($data['upload_error']) ) {
 
-		    		// Update artikel sesuai post_data dan id-nya
 			        $this->blog_model->update($post_data, $id);
 
 			        $this->load->view('templates/header');
@@ -249,17 +242,17 @@ class Blog extends CI_Controller {
 
 			$data['page_title'] = 'Delete artikel';
 
-			// Get artikel dari model berdasarkan $id
+			//mendapatkan artikel dari model berdasarkan id
 			$data['artikel'] = $this->blog_model->get_by_id($id);
 
-			// Jika id kosong atau tidak ada id yg dimaksud, lempar user ke halaman blog
+			// cek apakah id kosong atau tidak
 			if ( empty($id) || !$data['artikel'] ) show_404();
 
-			// Kita simpan dulu nama file yang lama
 			$old_image = $data['artikel']->post_thumbnail;
 
-	    	// Hapus file image yang lama jika ada
+			//cek apakah ada file lama atu tidak
 	    	if( !empty($old_image) ) {
+					// jika ada maka hapus file lama
 	    		if ( file_exists( './uploads/'.$old_image ) ){
 	    		    unlink( './uploads/'.$old_image );
 	    		} else {
@@ -267,15 +260,12 @@ class Blog extends CI_Controller {
 	    		}
 	    	}
 
-			// Hapus artikel sesuai id-nya
-	        if( ! $this->blog_model->delete($id) )
-	        {
-	        	// Jika gagal, tampilkan failnya
-		        $this->load->view('templates/header');
-		        $this->load->view('blogs/blog_failed', $data);
-		        $this->load->view('templates/footer');
+	      if( ! $this->blog_model->delete($id) )
+	      {
+		      $this->load->view('templates/header');
+		      $this->load->view('blogs/blog_failed', $data);
+		      $this->load->view('templates/footer');
 		    } else {
-		    	// Ok, sudah terhapus
 		    	$this->load->view('templates/header');
 		        $this->load->view('blogs/blog_success', $data);
 		        $this->load->view('templates/footer');
