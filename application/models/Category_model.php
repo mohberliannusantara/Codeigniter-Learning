@@ -9,14 +9,14 @@ class Category_model extends CI_Model
         parent::__construct();
     }
 
+    //fungsi untuk mengambil seluruh data category
     public function get_all()
     {
-        $this->db->order_by('cat_name');
-
         $query = $this->db->get('categories');
         return $query->result();
     }
 
+    // fungsi insert category
     public function create()
     {
         $data = array(
@@ -34,7 +34,8 @@ class Category_model extends CI_Model
         return $query->row();
     }
 
-    public function update_category($data, $id)
+    //fungsi update data
+    public function update($data, $id)
     {
         if ( !empty($data) && !empty($id) ){
             $update = $this->db->update( 'categories', $data, array('cat_id'=>$id) );
@@ -44,7 +45,8 @@ class Category_model extends CI_Model
         }
     }
 
-    public function delete_category($id)
+    //fungsi delete
+    public function delete($id)
     {
         if ( !empty($id) ){
             $delete = $this->db->delete('categories', array('cat_id'=>$id) );

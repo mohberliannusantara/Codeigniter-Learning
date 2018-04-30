@@ -12,6 +12,11 @@ class Blog_model extends CI_Model
   //fungsi mengambil semua data
   public function get_all()
   {
+    $this->db->order_by('blogs.post_date', 'DESC');
+
+    // Inner Join dengan table Categories
+    $this->db->join('categories', 'categories.cat_id = blogs.fk_cat_id');
+
     // Memakai Query Builder
     $query = $this->db->get('blogs');
 
@@ -22,18 +27,18 @@ class Blog_model extends CI_Model
   //fungsi insert data
   public function create($data)
   {
-      return $this->db->insert('blogs', $data);
+    return $this->db->insert('blogs', $data);
   }
 
   //fungsi update data
   public function update($data, $id)
   {
-      if ( !empty($data) && !empty($id) ){
-          $update = $this->db->update( 'blogs', $data, array('post_id'=>$id) );
-          return $update ? true : false;
-      } else {
-          return false;
-      }
+    if ( !empty($data) && !empty($id) ) {
+      $update = $this->db->update( 'blogs', $data, array('post_id'=>$id) );
+      return $update ? true : false;
+    } else {
+      return false;
+    }
   }
 
   //fungsi delete data
@@ -57,32 +62,30 @@ class Blog_model extends CI_Model
   //fungsi mengambil data berdasarkan slug/judul
   public function get_by_slug($slug)
   {
+    // Inner Join dengan table Categories
+    $this->db->select ('
+      blogs.*,
+      categories.cat_id as category_id,
+      categories.cat_name,
+      categories.cat_description,
+    ');
+    $this->db->join('categories', 'categories.cat_id = blogs.fk_cat_id');
 
-       // Inner Join dengan table Categories
-      $this->db->select ( '
-          blogs.*,
-          categories.cat_id as category_id,
-          categories.cat_name,
-          categories.cat_description,
-      ' );
-      $this->db->join('categories', 'categories.cat_id = blogs.fk_cat_id');
+    $query = $this->db->get_where('blogs', array('post_slug' => $slug));
 
-      $query = $this->db->get_where('blogs', array('post_slug' => $slug));
-
-      // Karena datanya cuma 1, kita return cukup via row() saja
-      return $query->row();
+    // Karena datanya cuma 1, kita return cukup via row() saja
+    return $query->row();
   }
 
   //fungsi mengambil data berdasarkan catecory
   public function get_by_category($category_id)
   {
+    $this->db->order_by('blogs.post_id', 'DESC');
 
-      $this->db->order_by('blogs.post_id', 'DESC');
+    $this->db->join('categories', 'categories.cat_id = blogs.fk_cat_id');
+    $query = $this->db->get_where('blogs', array('cat_id' => $category_id));
 
-      $this->db->join('categories', 'categories.cat_id = blogs.fk_cat_id');
-      $query = $this->db->get_where('blogs', array('cat_id' => $category_id));
-
-      return $query->result();
+    return $query->result();
   }
 }
 

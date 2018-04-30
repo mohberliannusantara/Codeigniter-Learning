@@ -31,7 +31,7 @@
 
 							<div class="card-body">
 								<h5><?php echo character_limiter($key->post_title, 40) ?></h5>
-								<!-- <small class="text-success text-uppercase"><?php //echo $key->cat_name ?></small> -->
+								<small class="text-success text-uppercase"><?php echo $key->cat_name ?></small>
 								<p class="card-text"><?php echo word_limiter($key->post_content, 20) ?></p>
 
 								<div class="d-flex justify-content-between align-items-center">
@@ -40,7 +40,7 @@
 										<a href="<?php echo base_url(). 'blog/read/' . $key->post_slug ?>" class="btn btn-outline-secondary">Baca</a>
 										<a href="<?php echo base_url(). 'blog/edit/' . $key->post_id ?>" class="btn btn-outline-secondary">Edit</a>
 									</div>
-									<!-- <small class="text-muted"><?php echo time_ago($key->post_date) ?></small> -->
+									<small class="text-muted"><?php echo time_ago($key->post_date) ?></small>
 								</div>
 							</div>
 

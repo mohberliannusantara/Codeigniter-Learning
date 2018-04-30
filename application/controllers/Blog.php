@@ -32,7 +32,7 @@ class Blog extends CI_Controller {
 	{
 		$data['page_title'] = 'Tulis Artikel';
 
-		// butuh meload helper dan library untuk validasi
+		// meload helper dan library untuk validasi
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
