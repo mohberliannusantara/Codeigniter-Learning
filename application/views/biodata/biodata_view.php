@@ -23,8 +23,7 @@
 
 					<div class="col-md-4">
 						<div class="card mb-4 box-shadow border-0">
-							<img class="card-img-top" data-src="holder.js/100px190?theme=thumb&bg=eaeaea&fg=aaa&text=Thumbnail" alt="Card image cap">
-
+							
 							<div class="card-body">
 								<h5><?php echo character_limiter($key->nama, 50) ?></h5>
 								<small class="text-success text-uppercase"><?php echo $key->nim ?></small>

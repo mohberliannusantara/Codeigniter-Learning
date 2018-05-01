@@ -147,7 +147,7 @@ class Blog extends CI_Controller {
 		// cek apakah id kosong atau tidak
 		if ( empty($id) || !$data['artikel'] ) redirect('blog');
 
-			$data['categories'] = $this->category_model->generate_cat_drop;
+			$data['categories'] = $this->category_model->generate_cat_dropdown();
 
 			$old_image = $data['artikel']->post_thumbnail;
 

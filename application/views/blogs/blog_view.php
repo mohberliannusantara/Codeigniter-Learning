@@ -21,18 +21,18 @@
 						foreach ($all_artikel as $key) :
 					?>
 
-					<div class="col-md-4">
-						<div class="card mb-4 box-shadow border-0">
+					<div class="col-md-6">
+						<div class="media mb-4 box-shadow border-0 bg-white">
 							<?php if( $key->post_thumbnail ) : ?>
-							<img class="card-img-top" src="<?php echo base_url() .'uploads/'. $key->post_thumbnail ?>" alt="Card image cap">
+							<img class="mr-3" src="<?php echo base_url() .'uploads/'. $key->post_thumbnail ?>" alt="Card image cap" style="height: 200px; width: 200px;">
 							<?php ; else : ?>
-							<img class="card-img-top" data-src="holder.js/100px190?theme=thumb&bg=eaeaea&fg=aaa&text=Thumbnail" alt="Card image cap">
+							<img class="mr-3" data-src="holder.js/100px190?theme=thumb&bg=eaeaea&fg=aaa&text=Thumbnail" alt="Card image cap" style="height: 200px; width: 200px;">
 							<?php endif; ?>
 
 							<div class="card-body">
 								<h5><?php echo character_limiter($key->post_title, 40) ?></h5>
 								<small class="text-success text-uppercase"><?php echo $key->cat_name ?></small>
-								<p class="card-text"><?php echo word_limiter($key->post_content, 20) ?></p>
+								<p class="card-text"><?php echo word_limiter($key->post_content, 10) ?></p>
 
 								<div class="d-flex justify-content-between align-items-center">
 									<div class="btn-group">

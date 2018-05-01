@@ -10,7 +10,8 @@
 			<h1 class="jumbotron-heading"><?php echo $artikel->post_title ?></h1>
 
 			<small>Ditulis <?php echo time_ago($artikel->post_date) ?> dalam <a href="<?php echo site_url( 'category/'. $artikel->fk_cat_id ) ?>"><?php echo $artikel->cat_name ?></a></small>
-			<img class="card-img-top" src="<?php echo base_url() .'uploads/'. $artikel->post_thumbnail ?>" alt="Card image cap" width=300>
+			<br>
+			<img class="card-img-top" src="<?php echo base_url() .'uploads/'. $artikel->post_thumbnail ?>" alt="Card image cap" style="height: 50%; width: 50%;">
 		</div>
 	</section>
 

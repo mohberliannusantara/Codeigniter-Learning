@@ -40,9 +40,14 @@
                 </ul>
 
                 <div class="btn-group" role="group" aria-label="Data baru">
-                    <?php echo anchor('blog/create', 'Artikel Baru', array('class' => 'btn btn-outline-light')); ?>
-                    <?php echo anchor('category/create', 'Kategori Baru', array('class' => 'btn btn-outline-light')); ?>
+                    <?php // echo anchor('blog/create', 'Artikel Baru', array('class' => 'btn btn-outline-light')); ?>
+                    <?php //echo anchor('category/create', 'Kategori Baru', array('class' => 'btn btn-outline-light')); ?>
+
                 </div>
+                <form class="form-inline my-2 my-lg-0">
+                  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+               </form>
             </div>
         </nav>
 

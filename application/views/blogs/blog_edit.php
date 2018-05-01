@@ -10,8 +10,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2">
-					
-					<?php    
+
+					<?php
 						$this->form_validation->set_error_delimiters('<div class="alert alert-warning" role="alert">', '</div>');
 					?>
 					<?php echo validation_errors(); ?>
@@ -36,11 +36,12 @@
 						<div class="invalid-feedback">Pilih dulu kategorinya gan</div>
 					</div>
 					<div class="form-group">
-						<!-- Load thumbnail, jika ada -->
 						<?php if( $artikel->post_thumbnail ) : ?>
-						<img class="card-img-top" src="<?php echo base_url() .'uploads/'. $artikel->post_thumbnail ?>" alt="Card image cap" width=300>
+							<center>
+								<img class="card-img-top" src="<?php echo base_url() .'uploads/'. $artikel->post_thumbnail ?>" alt="Card image cap" style="height: 400px; width: 400px;">
+							</center>
 						<?php endif; ?>
-
+						<br>
 						<label for="thumbnail">Gambar thumbnail</label>
 						<input type="file" class="form-control-file" name="thumbnail">
 					</div>
