@@ -1,12 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
-<div class="container">	
+<div class="container">
 	<!-- Begin page content -->
 	<main role="main" class="container">
 
-		<h5><?php echo $mode ?> blog gagal.</h5>
+		<h1><?php echo $mode ?> Category gagal.</h1>
 
-		<a href="<?php echo base_url() ?>blog">Kembali</a>
+		<a href="<?php echo base_url() ?>category">Kembali</a>
 
 	</main>
 </div>

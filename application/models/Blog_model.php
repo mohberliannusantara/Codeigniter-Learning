@@ -10,18 +10,27 @@ class Blog_model extends CI_Model
   }
 
   //fungsi mengambil semua data
-  public function get_all()
+  public function get_all( $limit = FALSE, $offset = FALSE)
   {
+    if ( $limit ) {
+      $this->db->limit($limit, $offset);
+    }
+
     $this->db->order_by('blogs.post_date', 'DESC');
 
     // Inner Join dengan table Categories
     $this->db->join('categories', 'categories.cat_id = blogs.fk_cat_id');
 
-    // Memakai Query Builder
     $query = $this->db->get('blogs');
 
     // Return dalam bentuk object
     return $query->result();
+
+  }
+
+  public function get_total()
+  {
+      return $this->db->count_all("blogs");
   }
 
   //fungsi insert data
@@ -46,7 +55,7 @@ class Blog_model extends CI_Model
   {
     if ( !empty($id) ){
       $delete = $this->db->delete('blogs', array('post_id'=>$id) );
-        return $delete ? true : false;
+      return $delete ? true : false;
     } else {
       return false;
     }
@@ -64,10 +73,10 @@ class Blog_model extends CI_Model
   {
     // Inner Join dengan table Categories
     $this->db->select ('
-      blogs.*,
-      categories.cat_id as category_id,
-      categories.cat_name,
-      categories.cat_description,
+    blogs.*,
+    categories.cat_id as category_id,
+    categories.cat_name,
+    categories.cat_description,
     ');
     $this->db->join('categories', 'categories.cat_id = blogs.fk_cat_id');
 
@@ -87,7 +96,8 @@ class Blog_model extends CI_Model
 
     return $query->result();
   }
+
 }
 
 
- ?>
+?>
