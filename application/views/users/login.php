@@ -4,6 +4,10 @@
     <div class="container">
       <h1 class="jumbotron-heading"><?php	echo $page_title ?></h1>
       <h6 class="text-muted">Silahkan Isi Username dan Password Anda</h6>
+      <br>
+      <?php if($this->session->flashdata('login_failed')): ?>
+        <?php echo '<p class="alert alert-danger">'.$this->session->flashdata('login_failed').'</p>'; ?>
+      <?php endif; ?>
     </div>
   </section>
   <section>
@@ -13,7 +17,8 @@
           <?php
           $this->form_validation->set_error_delimiters('<div class="alert alert-warning" role="alert">', '</div>');
           echo validation_errors();
-          echo form_open('user/login'); ?>
+          echo form_open('user/login');
+          ?>
           <div class="form-group">
             <input type="text" name="username" class="form-control" placeholder="Masukkan Username" required autofocus>
           </div>
@@ -22,6 +27,8 @@
           </div>
           <button type="submit" class="btn btn-primary btn-block">Login</button>
           <?php echo form_close(); ?>
+          <br>
+          Tidak punya akun ? <a href="<?php echo site_url('user/register') ?>">Daftar</a>
         </div>
       </div>
     </div>

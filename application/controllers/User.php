@@ -1,16 +1,14 @@
 <?php
 class User extends CI_Controller{
 
-  public function __construct()
-  {
+  public function __construct(){
     parent::__construct();
 
     $this->load->library('form_validation');
     $this->load->model('user_model');
   }
 
-  public function register()
-  {
+  public function register(){
     $data['page_title'] = 'Registrasi User';
 
     $this->form_validation->set_rules('nama', 'Nama', 'required');
@@ -53,11 +51,9 @@ class User extends CI_Controller{
       // Get & encrypt password
       $password = md5($this->input->post('password'));
 
-      // Login user
       $user_id = $this->user_model->login($username, $password);
 
       if($user_id){
-        // Buat session
         $user_data = array(
           'user_id' => $user_id,
           'username' => $username,
@@ -66,17 +62,25 @@ class User extends CI_Controller{
 
         $this->session->set_userdata($user_data);
 
-        // Set message
-        $this->session->set_flashdata('user_loggedin', 'You are now logged in');
+        $this->session->set_flashdata('user_login', 'You are now logged in');
 
         redirect('blog');
       } else {
-        // Set message
+
         $this->session->set_flashdata('login_failed', 'Login is invalid');
 
         redirect('user/login');
       }
     }
+  }
+
+  public function logout(){
+    // Unset user data
+    $this->session->unset_userdata('logged_in');
+    $this->session->unset_userdata('user_id');
+    $this->session->unset_userdata('username');
+
+    redirect('blog');
   }
 }
 ?>

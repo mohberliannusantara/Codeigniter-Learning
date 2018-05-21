@@ -1,4 +1,5 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?><!doctype html>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -18,7 +19,6 @@
   <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"> -->
   <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.css"/> -->
   <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
-
 
 </head>
 <body>
@@ -45,7 +45,11 @@
           <a class="nav-link" href="<?php echo site_url() ?>about">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?php echo site_url() ?>user/login">Login</a>
+          <?php if($this->session->userdata('user_login')){ ?>
+            <a class="nav-link" href="<?php echo site_url() ?>user/logout">Logout</a>
+          <?php }  else { ?>
+            <a class="nav-link" href="<?php echo site_url() ?>user/login">Login</a>
+          <?php } ?>
         </li>
       </ul>
     </div>
