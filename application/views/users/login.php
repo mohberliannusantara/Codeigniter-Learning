@@ -2,18 +2,18 @@
 <main role="main" class="container">
   <section class="jumbotron text-center">
     <div class="container">
-      <h1 class="jumbotron-heading"><?php	echo $page_title ?></h1>
-      <h6 class="text-muted">Silahkan Isi Username dan Password Anda</h6>
-      <br>
-      <?php if($this->session->flashdata('login_failed')): ?>
-        <?php echo '<p class="alert alert-danger">'.$this->session->flashdata('login_failed').'</p>'; ?>
-      <?php endif; ?>
+      <img src="<?php echo base_url('assets/icon.png') ?>" alt="">
     </div>
   </section>
   <section>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 offset-lg-2">
+          <center>
+          <?php if($this->session->flashdata('login_failed')): ?>
+            <?php echo '<p class="alert alert-danger">'.$this->session->flashdata('login_failed').'</p>'; ?>
+          <?php endif; ?>
+          </center>
           <?php
           $this->form_validation->set_error_delimiters('<div class="alert alert-warning" role="alert">', '</div>');
           echo validation_errors();

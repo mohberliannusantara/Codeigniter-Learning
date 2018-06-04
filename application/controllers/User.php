@@ -57,6 +57,7 @@ class User extends CI_Controller{
         $user_data = array(
           'user_id' => $user_id,
           'username' => $username,
+          'level' => $level,
           'logged_in' => true
         );
 
@@ -64,8 +65,13 @@ class User extends CI_Controller{
 
         $this->session->set_flashdata('user_login', 'You are now logged in');
 
-        redirect('blog');
-      } else {
+        if ($user_data->level == 1) {
+          redirect('biodata');
+        }elseif ($user_data->level == 2) {
+          redirect('blo');
+        }
+      }
+      else {
 
         $this->session->set_flashdata('login_failed', 'Login is invalid');
 

@@ -10,7 +10,8 @@ class User_model extends CI_Model{
       'email' => $this->input->post('email'),
       'username' => $this->input->post('username'),
       'password' => $enc_password,
-      'kodepos' => $this->input->post('kodepos')
+      'kodepos' => $this->input->post('kodepos'),
+      'level' => 2
       // 'register_date' => date('Y-m-d H:i:s',now('register_date'))
       // 'register_date' =>date('Y-m-d H:i:s',time())
     );
@@ -35,6 +36,5 @@ class User_model extends CI_Model{
   }
 
 }
-
 
 ?>

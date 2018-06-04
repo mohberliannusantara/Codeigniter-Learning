@@ -2,7 +2,8 @@
 <main role="main" class="container">
   <section class="jumbotron text-center">
     <div class="container">
-      <h1 class="jumbotron-heading"><?php	echo $page_title ?></h1>
+      <img src="<?php echo base_url('assets/icon.png') ?>" alt="" style="height: 120px; width:100px;">
+      <h2 class="jumbotron-heading text-muted"><?php	echo $page_title ?></h2>
     </div>
   </section>
   <section>
