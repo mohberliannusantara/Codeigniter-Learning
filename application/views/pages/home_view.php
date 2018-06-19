@@ -3,9 +3,18 @@
 <!-- Begin page content -->
 <main role="main" class="container">
 	<section class="jumbotron text-center">
-		<div class="container">
-			<h1 class="jumbotron-heading">Home</h1>
-			<h6 class="text-muted">Ini bagian Home Page</h6>
-		</div>
+		<?php if($this->session->userdata('user_login')){ ?>
+			<div class="container">
+				<div class="py-5 text-center">
+					<h2>Selamat Datang</h1>
+					<h1><?php echo $user->nama ?></h1>
+				</div>
+			</div>
+		<?php }  else { ?>
+			<div class="container">
+				<h1 class="jumbotron-heading">Home</h1>
+				<h6 class="text-muted">Ini bagian Home Page</h6>
+			</div>
+		<?php } ?>
 	</section>
 </main>

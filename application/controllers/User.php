@@ -57,19 +57,29 @@ class User extends CI_Controller{
         $user_data = array(
           'user_id' => $user_id,
           'username' => $username,
-          'level' => $level,
-          'logged_in' => true
+          'logged_in' => true,
+          'level' => $this->user_model->user_level($user_id)
         );
 
         $this->session->set_userdata($user_data);
 
         $this->session->set_flashdata('user_login', 'You are now logged in');
 
-        if ($user_data->level == 1) {
-          redirect('biodata');
-        }elseif ($user_data->level == 2) {
-          redirect('blo');
-        }
+        redirect('user/home');
+
+        // if ($user_data->level == 1) {
+        //   redirect('biodata');
+        // }elseif ($user_data->level == 2) {
+        //   redirect('blog');
+        // }
+        // if($user_id){
+        //     $this->session->set_flashdata('user_loggedin', 'You are logged in' . $username );
+        //     redirect('user/dashboard');
+        // } else {
+        //     $this->session->set_flashdata('login_failed', 'Login invalid');
+        //     redirect('user/login');
+        // }
+
       }
       else {
 
@@ -88,5 +98,23 @@ class User extends CI_Controller{
 
     redirect('blog');
   }
+
+  public function home(){
+
+    if(!$this->session->userdata('logged_in')){
+      redirect('user/login');
+    }
+
+    $username = $this->session->userdata('username');
+
+    // Dapatkan detail user
+    $data['user'] = $this->user_model->user_details($username);
+
+    // Load dashboard
+    $this->load->view('templates/header');
+    $this->load->view('pages/home_view', $data);
+    $this->load->view('templates/footer');
+  }
+
 }
 ?>

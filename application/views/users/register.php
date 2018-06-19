@@ -18,32 +18,45 @@
           <div class="form-group">
             <label>Nama Lengkap</label>
             <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap"value="<?php echo set_value('nama') ?>" required autofocus>
-            <!-- <div class="invalid-feedback">Isi Nama Anda</div> -->
           </div>
+
           <div class="form-group">
             <label>Email</label>
             <input type="text" class="form-control" name="email" placeholder="Email" value="<?php echo set_value('email') ?>" required>
-            <!-- <div class="invalid-feedback">Isi Email Anda</div> -->
           </div>
+
           <div class="form-group">
             <label>Kodepos</label>
             <input type="text" class="form-control" name="kodepos" placeholder="Kodepos" value="<?php echo set_value('kodepos') ?>" required>
-            <!-- <div class="invalid-feedback">Isi Kodepos Anda</div> -->
-          </div><div class="form-group">
+          </div>
+
+          <div class="form-group">
             <label>Username</label>
             <input type="text" class="form-control" name="username" placeholder="Username" value="<?php echo set_value('username') ?>" required>
-            <!-- <div class="invalid-feedback">Isi Username Anda</div> -->
           </div>
+
           <div class="form-group">
             <label>Password</label>
             <input type="password" class="form-control" name="password" placeholder="Password">
-            <!-- <div class="invalid-feedback">Isi Password Anda</div> -->
           </div>
+
           <div class="form-group">
             <label>Konfirmasi Password</label>
             <input type="password" class="form-control" name="password2" placeholder="Password">
-            <!-- <div class="invalid-feedback">Konfirmasi Password Anda</div> -->
           </div>
+
+          <div class="form-group">
+            <label for="">Paket Membership</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="membership" id="regulermember" value="2" checked>
+              <label class="form-check-label" for="regulermember">Reguler</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="membership" id="premiummember" value="3">
+              <label class="form-check-label" for="premiummember">Premium</label>
+            </div>
+          </div>
+
           <button type="submit" class="btn btn-primary">Daftar</button>
           <?php echo form_close(); ?>
         </div>

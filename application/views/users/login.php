@@ -10,9 +10,10 @@
       <div class="row">
         <div class="col-lg-8 offset-lg-2">
           <center>
-          <?php if($this->session->flashdata('login_failed')): ?>
-            <?php echo '<p class="alert alert-danger">'.$this->session->flashdata('login_failed').'</p>'; ?>
-          <?php endif; ?>
+            <?php
+            if($this->session->flashdata('login_failed')):
+              echo '<p class="alert alert-danger">'.$this->session->flashdata('login_failed').'</p>';
+            endif; ?>
           </center>
           <?php
           $this->form_validation->set_error_delimiters('<div class="alert alert-warning" role="alert">', '</div>');
@@ -30,6 +31,7 @@
           <br>
           Tidak punya akun ? <a href="<?php echo site_url('user/register') ?>">Daftar</a>
         </div>
+        <?php echo form_close(); ?>
       </div>
     </div>
   </section>
