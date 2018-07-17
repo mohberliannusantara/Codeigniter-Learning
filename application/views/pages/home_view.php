@@ -3,7 +3,7 @@
 <!-- Begin page content -->
 <main role="main" class="container">
 	<section class="jumbotron text-center">
-		<?php if($this->session->userdata('user_login')){ ?>
+		<?php if($this->session->userdata('logged_in')){ ?>
 			<div class="container">
 				<div class="py-5 text-center">
 					<h2>Selamat Datang</h1>

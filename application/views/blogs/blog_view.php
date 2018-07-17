@@ -6,7 +6,9 @@
 		<div class="container">
 			<h1 class="jumbotron-heading"><?php echo $page_title ?></h1>
 			<?php echo anchor('blog/create', 'Tulis Artikel', array('class' => 'btn btn-primary')); ?>
-			<?php echo anchor('datatables/', 'Lihat versi DataTable', array('class' => 'btn btn-success')); ?>
+			<?php if ($this->session->userdata('level') == 1): ?>
+				<?php echo anchor('datatables/', 'Lihat versi DataTable', array('class' => 'btn btn-success')); ?>
+			<?php endif; ?>
 		</div>
 	</section>
 	<?php if( !empty($all_artikel) ) : ?>

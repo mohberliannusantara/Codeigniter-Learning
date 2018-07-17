@@ -47,18 +47,19 @@
 
           <div class="form-group">
             <label for="">Paket Membership</label>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="membership" id="regulermember" value="2" checked>
-              <label class="form-check-label" for="regulermember">Reguler</label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="membership" id="premiummember" value="3">
-              <label class="form-check-label" for="premiummember">Premium</label>
-            </div>
-          </div>
+            <?php foreach ($level as $key):
+              if ($key->level_id != 1): ?>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="membership" id="regulermember" value="<?php echo $key->level_id; ?>" checked>
+                <label class="form-check-label" for="regulermember"><?php echo $key->nama_level; ?></label>
+              </div>
+            <?php endif;
+          endforeach;?>
 
-          <button type="submit" class="btn btn-primary">Daftar</button>
-          <?php echo form_close(); ?>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Daftar</button>
+            <?php echo form_close(); ?>
+          </div>
         </div>
       </div>
     </div>

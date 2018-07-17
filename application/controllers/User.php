@@ -6,6 +6,23 @@ class User extends CI_Controller{
 
     $this->load->library('form_validation');
     $this->load->model('user_model');
+    $this->load->model('level_model');
+  }
+
+  public function index(){
+    if(!$this->session->userdata('logged_in')){
+      redirect('user/login');
+    }
+
+    $username = $this->session->userdata('username');
+
+    // Dapatkan detail user
+    $data['user'] = $this->user_model->user_details($username);
+
+    // Load dashboard
+    $this->load->view('templates/header');
+    $this->load->view('pages/home_view', $data);
+    $this->load->view('templates/footer');
   }
 
   public function register(){
@@ -19,6 +36,7 @@ class User extends CI_Controller{
     $this->form_validation->set_rules('password2', 'Konfirmasi Password', 'matches[password]');
 
     if($this->form_validation->run() === FALSE){
+      $data['level'] = $this->level_model->get_all();
       $this->load->view('templates/header');
       $this->load->view('users/register', $data);
       $this->load->view('templates/footer');
@@ -63,28 +81,12 @@ class User extends CI_Controller{
 
         $this->session->set_userdata($user_data);
 
-        $this->session->set_flashdata('user_login', 'You are now logged in');
+        $this->session->set_flashdata('user_loggedin', 'You are now logged in');
 
-        redirect('user/home');
-
-        // if ($user_data->level == 1) {
-        //   redirect('biodata');
-        // }elseif ($user_data->level == 2) {
-        //   redirect('blog');
-        // }
-        // if($user_id){
-        //     $this->session->set_flashdata('user_loggedin', 'You are logged in' . $username );
-        //     redirect('user/dashboard');
-        // } else {
-        //     $this->session->set_flashdata('login_failed', 'Login invalid');
-        //     redirect('user/login');
-        // }
-
+        redirect('user');
       }
       else {
-
         $this->session->set_flashdata('login_failed', 'Login is invalid');
-
         redirect('user/login');
       }
     }
@@ -99,7 +101,7 @@ class User extends CI_Controller{
     redirect('blog');
   }
 
-  public function home(){
+  public function dashboard(){
 
     if(!$this->session->userdata('logged_in')){
       redirect('user/login');
@@ -108,11 +110,11 @@ class User extends CI_Controller{
     $username = $this->session->userdata('username');
 
     // Dapatkan detail user
-    $data['user'] = $this->user_model->user_details($username);
+    $data['user'] = $this->user_model->user_details( $username );
 
     // Load dashboard
     $this->load->view('templates/header');
-    $this->load->view('pages/home_view', $data);
+    $this->load->view('users/dashboard', $data);
     $this->load->view('templates/footer');
   }
 

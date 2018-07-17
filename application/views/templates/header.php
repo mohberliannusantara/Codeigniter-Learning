@@ -38,31 +38,42 @@
         <li class="nav-item">
           <a class="nav-link" href="<?php echo site_url() ?>">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<?php echo site_url() ?>biodata">Biodata</a>
-        </li>
+        <?php if($this->session->userdata('logged_in')) : ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo site_url() ?>biodata">Biodata</a>
+          </li>
+        <?php endif; ?>
         <li class="nav-item">
           <a class="nav-link" href="<?php echo site_url() ?>blog">Artikel</a>
         </li>
-        <?php if($this->session->userdata('user_login')) : ?>
+        <?php if($this->session->userdata('logged_in')) : ?>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo site_url() ?>category">Kategori</a>
           </li>
         <?php endif; ?>
-        <li class="nav-item">
-          <a class="nav-link" href="<?php echo site_url() ?>about">About</a>
-        </li>
-      </ul>
-      <?php if($this->session->userdata('user_login')){ ?>
-        <div class="btn-group" role="group" aria-label="Data baru">
-          <a class="btn btn-outline-light" href="<?php echo site_url() ?>user/logout">Logout</a>
-        </div>
-      <?php }  else { ?>
-        <div class="btn-group" role="group" aria-label="Data baru">
-          <a class="btn btn-outline-light" href="<?php echo site_url() ?>user/login">Login</a>
-        </div>
-      <?php } ?>
-    </div>
-  </nav>
-
-  <!-- akhir Header -->
+        <?php if($this->session->userdata('logged_in')) :
+          if ($this->session->userdata('level') == 1): ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo site_url() ?>category">Pengguna</a>
+          </li>
+        <?php endif;
+      endif; ?>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo site_url() ?>about">About</a>
+      </li>
+    </ul>
+    <?php if($this->session->userdata('logged_in')){ ?>
+      <div class="btn-group" role="group" aria-label="Data baru">
+        <?php if ($this->session->userdata('level') == 1): ?>
+          <a class="btn btn-outline-light" href="<?php echo site_url() ?>level">User Level</a>
+        <?php endif; ?>
+        <a class="btn btn-outline-light" href="<?php echo site_url() ?>user/logout">Logout</a>
+      </div>
+    <?php }  else { ?>
+      <div class="btn-group" role="group" aria-label="Data baru">
+        <a class="btn btn-outline-light" href="<?php echo site_url() ?>user/login">Login</a>
+      </div>
+    <?php } ?>
+  </div>
+</nav>
+<!-- akhir Header -->
